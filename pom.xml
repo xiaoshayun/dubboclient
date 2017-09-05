@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ztev</groupId>
+	<artifactId>dubboclient</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.3.RELEASE</version>
+	</parent>
+	<properties>
+		<io.dubbo.springboot.version>1.0.0</io.dubbo.springboot.version>
+		<io.netty.version>3.7.0.Final</io.netty.version>
+		<start-class>dubboclient.SimpleApplication</start-class>
+	</properties>
+	<dependencies>
+		<!-- SpringBoot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<!-- Dubbo -->
+		<dependency>
+			<groupId>io.dubbo.springboot</groupId>
+			<artifactId>spring-boot-starter-dubbo</artifactId>
+			<version>${io.dubbo.springboot.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.netty</groupId>
+					<artifactId>netty</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty</artifactId>
+			<version>${io.netty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- google -->
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ztev</groupId>
+			<artifactId>ztev-log-api</artifactId>
+			<version>20170824</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ztev</groupId>
+			<artifactId>ztev-user-api</artifactId>
+			<version>20170824</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ztev</groupId>
+			<artifactId>ztev-trade-api</artifactId>
+			<version>20170824</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ztev</groupId>
+			<artifactId>ztev-webjar</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ztev</groupId>
+			<artifactId>device-mgt-api</artifactId>
+			<version>20170714</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ztev</groupId>
+			<artifactId>ztev-alarm-api</artifactId>
+			<version>20170619</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ztev</groupId>
+			<artifactId>ztev-card-api</artifactId>
+			<version>20170511</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ztev</groupId>
+			<artifactId>ztev-performance-api</artifactId>
+			<version>20170712</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- <plugin> <artifactId>maven-jar-plugin</artifactId> <configuration> 
+				<archive> <manifest> change addClasspath to true if daks is desktop version 
+				<addClasspath>true</addClasspath> <classpathPrefix>lib/</classpathPrefix> 
+				<mainClass>dubboclient.SimpleApplication</mainClass> </manifest> </archive> 
+				</configuration> </plugin> <plugin> <artifactId>maven-dependency-plugin</artifactId> 
+				<executions> <execution> <id>copy-dependencies</id> <phase>prepare-package</phase> 
+				<goals> <goal>copy-dependencies</goal> </goals> <configuration> ${project.build.directory}为Maven内置变量，缺省为target 
+				<outputDirectory>${project.build.directory}/lib</outputDirectory> </configuration> 
+				</execution> </executions> </plugin> -->
+			<!-- <plugin> <artifactId>maven-assembly-plugin</artifactId> <configuration> 
+				<descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> </descriptorRefs> 
+				<archive> <manifest> <mainClass>dubboclient.SimpleApplication</mainClass> 
+				</manifest> </archive> </configuration> <executions> <execution> <id>make-assembly</id> 
+				this is used for inheritance merges <phase>package</phase> bind to the packaging 
+				phase <goals> <goal>single</goal> </goals> </execution> </executions> </plugin> -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
